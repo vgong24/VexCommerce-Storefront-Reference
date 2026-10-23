@@ -7,17 +7,20 @@
       "itemRef": "item.commerce.reference.plate-001",
       "label": "Reference Floral Plate",
       "availabilityState": "AVAILABLE",
-      "description": "Synthetic fixture used to prove managed storefront publication.",
-      "condition": "Synthetic reference condition",
+      "description": "Synthetic fixture revised by the AI-managed storefront proof.",
+      "condition": "Synthetic reference condition — revised",
       "price": {
-        "amountMinor": 12500,
+        "amountMinor": 13750,
         "currency": "USD"
       },
-      "imageRefs": []
+      "imageRefs": [
+        "assets/reference-plate.svg"
+      ]
     }
   ],
   "sourceRefs": [
     "vexwork.schema.vexwork.commerce-storefront-document/v1",
-    "github.pull.vexwork.78"
+    "github.pull.vexwork.78",
+    "vexwork.proof.ai-managed-storefront-revision/a001"
   ]
 }
