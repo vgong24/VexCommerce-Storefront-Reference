@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "vexcommerce.reference-storefront/v1",
+  "storefrontRef": "storefront.vexcommerce.reference",
+  "fixtureClass": "SYNTHETIC_PUBLIC_SAFE",
+  "items": [
+    {
+      "itemRef": "item.commerce.reference.plate-001",
+      "label": "Reference Floral Plate",
+      "availabilityState": "AVAILABLE",
+      "description": "Synthetic fixture used to prove managed storefront publication.",
+      "condition": "Synthetic reference condition",
+      "price": {
+        "amountMinor": 12500,
+        "currency": "USD"
+      },
+      "imageRefs": []
+    }
+  ],
+  "sourceRefs": [
+    "vexwork.schema.vexwork.commerce-storefront-document/v1",
+    "github.pull.vexwork.78"
+  ]
+}

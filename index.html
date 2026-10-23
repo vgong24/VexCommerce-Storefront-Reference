@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VexCommerce Storefront Reference</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
+    header { margin-bottom: 32px; }
+    .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .65; }
+    .card { border: 1px solid currentColor; border-radius: 18px; padding: 24px; }
+    .row { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; }
+    .muted { opacity: .68; }
+    .status { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Synthetic public-safe reference</div>
+    <h1>VexCommerce Storefront</h1>
+    <p class="muted">A tiny managed-storefront proving surface. No real customer or business data lives here.</p>
+  </header>
+  <main id="items" aria-live="polite">Loading storefront…</main>
+  <footer>
+    <p class="muted">VEXCOMMERCE-STOREFRONT-REFERENCE-A001</p>
+  </footer>
+  <script>
+    const money = (price) => new Intl.NumberFormat("en-US", {
+      style: "currency", currency: price.currency
+    }).format(price.amountMinor / 100);
+
+    fetch("./storefront.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`storefront ${response.status}`);
+        return response.json();
+      })
+      .then((storefront) => {
+        const root = document.querySelector("#items");
+        root.textContent = "";
+        for (const item of storefront.items) {
+          const article = document.createElement("article");
+          article.className = "card";
+          article.innerHTML = `
+            <div class="row">
+              <h2></h2>
+              <span class="status"></span>
+            </div>
+            <p class="description"></p>
+            <p class="condition muted"></p>
+            <strong class="price"></strong>
+          `;
+          article.querySelector("h2").textContent = item.label;
+          article.querySelector(".status").textContent = item.availabilityState;
+          article.querySelector(".description").textContent = item.description;
+          article.querySelector(".condition").textContent = item.condition;
+          article.querySelector(".price").textContent = money(item.price);
+          root.append(article);
+        }
+      })
+      .catch((error) => {
+        document.querySelector("#items").textContent = `Storefront unavailable: ${error.message}`;
+      });
+  </script>
+</body>
+</html>
