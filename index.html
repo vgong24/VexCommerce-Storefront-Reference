@@ -11,6 +11,8 @@
     .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .65; }
     .card { border: 1px solid currentColor; border-radius: 18px; padding: 24px; }
     .row { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; }
+    .media { margin: 0 0 20px; }
+    .media img { display: block; width: min(100%, 360px); height: auto; border-radius: 16px; }
     .muted { opacity: .68; }
     .status { font-weight: 700; }
   </style>
@@ -23,7 +25,7 @@
   </header>
   <main id="items" aria-live="polite">Loading storefront…</main>
   <footer>
-    <p class="muted">VEXCOMMERCE-STOREFRONT-REFERENCE-A001</p>
+    <p class="muted">VEXCOMMERCE-STOREFRONT-REVISION-A001</p>
   </footer>
   <script>
     const money = (price) => new Intl.NumberFormat("en-US", {
@@ -42,6 +44,7 @@
           const article = document.createElement("article");
           article.className = "card";
           article.innerHTML = `
+            <div class="media"></div>
             <div class="row">
               <h2></h2>
               <span class="status"></span>
@@ -50,6 +53,13 @@
             <p class="condition muted"></p>
             <strong class="price"></strong>
           `;
+          const imageRef = item.imageRefs?.[0];
+          if (imageRef) {
+            const image = document.createElement("img");
+            image.src = imageRef;
+            image.alt = `${item.label} synthetic reference illustration`;
+            article.querySelector(".media").append(image);
+          }
           article.querySelector("h2").textContent = item.label;
           article.querySelector(".status").textContent = item.availabilityState;
           article.querySelector(".description").textContent = item.description;
